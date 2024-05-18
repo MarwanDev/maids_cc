@@ -4,6 +4,9 @@ import { UserComponent } from '../user/user.component';
 import { User } from '../user';
 import { UserService } from '../user.service';
 import { UserListComponent } from '../user-list/user-list.component';
+import { ActivatedRoute } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +14,7 @@ import { UserListComponent } from '../user-list/user-list.component';
   imports: [
     CommonModule,
     UserComponent,
+    RouterModule,
     UserListComponent
   ],
   template: `
@@ -30,9 +34,8 @@ import { UserListComponent } from '../user-list/user-list.component';
       <button>
       <svg fill="#fff" height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z"></path> </g></svg>
       </button>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
+      <button (click)="navigateToHome(1)">1</button>
+      <button (click)="navigateToHome(2)">2</button>
       <button>
         <svg fill="#fff" height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path id="XMLID_222_" d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001 c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213 C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606 C255,161.018,253.42,157.202,250.606,154.389z"></path> </g></svg>
       </button>
@@ -44,8 +47,10 @@ export class HomeComponent {
   userList: User[] = [];
   userService: UserService = inject(UserService);
   filteredUserList: User[] = [];
-  constructor() {
-    this.userService.getAllUsers().then((userList: User[]) => {
+  route: ActivatedRoute = inject(ActivatedRoute);
+  constructor(private router: Router) {
+    const page = parseInt(this.route.snapshot.params['page']);
+    this.userService.getAllUsers(page).then((userList: User[]) => {
       this.userList = userList;
       this.filteredUserList = userList;
     });
@@ -66,6 +71,11 @@ export class HomeComponent {
         fullName.includes(searchTerm) ||
         user.email?.toLowerCase().includes(searchTerm)
       );
+    });
+  }
+  navigateToHome(page: number) {
+    this.router.navigate(['/home', page]).then(() => {
+      window.location.reload();
     });
   }
 }

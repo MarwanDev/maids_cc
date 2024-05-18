@@ -34,7 +34,6 @@ export class DetailsComponent {
 
   constructor() {
     const userId = parseInt(this.route.snapshot.params['id']);
-    console.log(userId);
     this.userService.getUserById(userId).then(user => {
       this.user = user;
     });
