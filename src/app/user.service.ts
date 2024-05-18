@@ -8,9 +8,8 @@ export class UserService {
 
   url = 'https://reqres.in/api/users';
 
-  async getAllUsers(): Promise<User[]> {
+  async getAllUsers(page: number = 1): Promise<User[]> {
     try {
-      let page = 1;
       const response = await fetch(`${this.url}?page=${page}`);
 
       if (!response.ok) {
