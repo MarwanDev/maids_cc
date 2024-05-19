@@ -126,3 +126,14 @@ nav button {
 nav button:active { /* Style for active button (pressed state) */
   transform: scale(0.9); /* Shrink slightly on click */
 }
+
+header {
+  display: block;
+  height: 60px;
+  padding: var(--content-padding);
+  box-shadow: 0px 5px 25px var(--shadow-color);
+}
+
+.brand-logo {
+  width: 150px;
+}

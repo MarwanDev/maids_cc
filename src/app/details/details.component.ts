@@ -3,14 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-details',
   standalone: true,
   imports: [
     CommonModule,
+    HeaderComponent
   ],
   template: `
+  <app-header></app-header>
   <div class="details-container">
     <img class="listing-photo" [src]="user?.avatar"
       alt="{{user?.first_name}} {{user?.last_name}}"/>

@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from '../user/user.component';
+import { HeaderComponent } from '../header/header.component';
 import { User } from '../user';
 import { UserService } from '../user.service';
 import { UserListComponent } from '../user-list/user-list.component';
-import { ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -15,8 +15,14 @@ import { RouterModule } from '@angular/router';
     UserComponent,
     RouterModule,
     UserListComponent,
+    HeaderComponent
   ],
   template: `
+    <a [routerLink]="['']">
+      <header class="brand-name">
+        <img class="brand-logo" src="/assets/logo.svg" alt="logo">
+      </header>
+    </a>
     <section>
       <form>
         <input (input)="filterResults(filter.value)" type="text" placeholder="Search by name, email or ID" #filter>
@@ -29,8 +35,8 @@ import { RouterModule } from '@angular/router';
       </app-user>
     </section>
     <nav class="pagination">
-      <button (click)="navigateToHome(1)">1</button>
-      <button (click)="navigateToHome(2)">2</button>
+      <button (click)="navigateToPage(1)">1</button>
+      <button (click)="navigateToPage(2)">2</button>
     </nav>
   `,
   styleUrl: './home.component.css'
@@ -39,7 +45,6 @@ export class HomeComponent {
   userList: User[] = [];
   userService: UserService = inject(UserService);
   filteredUserList: User[] = [];
-  route: ActivatedRoute = inject(ActivatedRoute);
   page = 1;
   constructor() {
     this.userService.getAllUsers(this.page).then((userList: User[]) => {
@@ -47,7 +52,6 @@ export class HomeComponent {
       this.filteredUserList = userList;
     });
   }
-
   filterResults(text: string) {
     if (!text) {
       this.filteredUserList = this.userList;
@@ -60,7 +64,6 @@ export class HomeComponent {
       if (!user) return false;
 
       const fullName = `${user.first_name?.toLowerCase()} ${user.last_name?.toLowerCase()}`;
-      console.log(user.id.toString());
       return (
         fullName.includes(searchTerm) ||
         user.email?.toLowerCase().includes(searchTerm) ||
@@ -68,10 +71,8 @@ export class HomeComponent {
       );
     });
   }
-  navigateToHome(page: number) {
+  navigateToPage(page: number) {
     this.page = page;
-    console.log(this.page);
-    console.log(this.filteredUserList);
     this.userService.getAllUsers(page).then((userList: User[]) => {
       this.userList = userList;
       this.filteredUserList = userList;

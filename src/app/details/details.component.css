@@ -33,3 +33,7 @@
   from { transform: translateX(-100px); } /* Start from off-screen */
   to { transform: translateX(0); } /* Animate to normal position */
 }
+
+.brand-logo {
+  display: none !important;
+}
