@@ -19,8 +19,8 @@ input[type="text"] {
 
 button {
   padding: 10px;
-  border: solid 1px var(--primary-color);
-  background: var(--primary-color);
+  border: solid 1px #436ab2;
+  background: #436ab2;
   color: white;
   border-radius: 8px;
   text-decoration: none;
@@ -61,4 +61,66 @@ button {
   .results {
       grid-template-columns: 1fr;
   }    
+}
+
+section form input[type="text"] {
+  opacity: 0.7; /* Initial opacity */
+  transition: opacity 0.3s ease-in-out; /* Animation properties */
+}
+
+section form input[type="text"]:focus {
+  opacity: 1; /* Opacity on focus */
+}
+
+section form button.primary {
+  transform: scale(1); /* Initial scale */
+  transition: transform 0.2s ease-in-out; /* Animation properties */
+}
+
+section form button.primary:hover {
+  transform: scale(1.1); /* Scale on hover */
+}
+
+.results app-user {
+  opacity: 0; /* Initial opacity (hidden) */
+  transition: opacity 0.5s ease-in-out; /* Animation properties */
+}
+
+.results app-user:nth-child(odd) { /* Animate odd-numbered elements */
+  animation: slideInLeft 0.5s ease-in-out forwards; /* Animation name and properties */
+}
+
+.results app-user:nth-child(even) { /* Animate even-numbered elements */
+  animation: slideInRight 0.5s ease-in-out forwards; /* Animation name and properties */
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px); /* Slide from left */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* No transformation */
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px); /* Slide from right */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* No transformation */
+  }
+}
+
+nav button {
+  transform: scale(1); /* Initial scale */
+  transition: transform 0.1s ease-in-out; /* Animation properties */
+}
+
+nav button:active { /* Style for active button (pressed state) */
+  transform: scale(0.9); /* Shrink slightly on click */
 }

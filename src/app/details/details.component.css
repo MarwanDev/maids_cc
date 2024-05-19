@@ -1,0 +1,35 @@
+.details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  height: 70vh;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.details-container img {
+  width: 270px;
+  border-radius: 18px;
+}
+
+.details-container {
+  opacity: 0; /* Initially hide the container */
+  animation: fadeIn ease 1s forwards; /* Animation properties */
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; } /* Start from invisible */
+  to { opacity: 1; } /* Animate to fully visible */
+}
+
+.listing-description {
+  transform: translateX(-100px); /* Initially slide text off-screen */
+  animation: slideIn ease 0.5s forwards; /* Animation properties */
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100px); } /* Start from off-screen */
+  to { transform: translateX(0); } /* Animate to normal position */
+}

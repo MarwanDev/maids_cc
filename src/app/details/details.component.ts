@@ -3,25 +3,21 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../user';
 import { UserService } from '../user.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-details',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
   ],
   template: `
   <div class="details-container">
-    <article>
-      <img class="listing-photo" [src]="user?.avatar"
-        alt="{{user?.first_name}} {{user?.last_name}}"/>
-      <section class="listing-description">
-        <h2 class="listing-heading">{{user?.first_name}} {{user?.last_name}}</h2>
-        <p class="listing-location">{{user?.email}}</p>
-      </section>
-    </article>
+    <img class="listing-photo" [src]="user?.avatar"
+      alt="{{user?.first_name}} {{user?.last_name}}"/>
+    <section class="listing-description">
+      <h2 class="listing-heading">{{user?.first_name}} {{user?.last_name}}</h2>
+      <p class="listing-location">{{user?.email}}</p>
+    </section>
   </div>
   `,
   styleUrls: ['./details.component.css'],

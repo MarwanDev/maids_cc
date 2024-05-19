@@ -11,10 +11,12 @@ import { User } from '../user';
     RouterModule
   ],
   template: `
-    <a class="listing" [routerLink]="['/details/', user.id]">
-      <img class="listing-photo" [src]="user.avatar" alt="{{user.first_name}} {{user.last_name}}">
-      <h2 class="listing-heading">{{ user.first_name }} {{ user.last_name }}</h2>
-      <p class="listing-email">{{ user.email}}</p>
+    <a class="user-container" [routerLink]="['/details/', user.id]">
+      <img [src]="user.avatar" alt="{{user.first_name}} {{user.last_name}}" />
+      <div class="content-container">
+        <h2 class="user-name">{{user.first_name}} {{user.last_name}}</h2>
+        <h2 class="user-name">{{user.email}}</h2>
+      </div>
     </a>
   `,
   styleUrl: './user.component.css'
