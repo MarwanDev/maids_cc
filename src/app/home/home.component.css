@@ -6,6 +6,8 @@
   margin-top: 50px;
   margin-bottom: 30px;
   justify-content: space-around;
+  justify-items: center;
+  align-items: center;
 }
 
 input[type="text"] {
