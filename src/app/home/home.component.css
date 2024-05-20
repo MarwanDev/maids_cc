@@ -144,6 +144,5 @@ header {
 .progress-container {
   position: fixed;
   top: 50%;
-  left: 50%;
-  width: 80vw;
+  left: 45%;
 }
