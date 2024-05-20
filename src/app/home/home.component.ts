@@ -1,4 +1,4 @@
-import { Component, inject  } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from '../user/user.component';
 import { HeaderComponent } from '../header/header.component';
@@ -18,6 +18,9 @@ import { RouterModule } from '@angular/router';
     HeaderComponent
   ],
   template: `
+  <div *ngIf="isLoading" class="progress-container">
+  <progress max="100"></progress>
+</div>
     <a [routerLink]="['']">
       <header class="brand-name">
         <img class="brand-logo" src="/assets/logo.svg" alt="logo">
@@ -43,14 +46,24 @@ import { RouterModule } from '@angular/router';
 })
 export class HomeComponent {
   userList: User[] = [];
-  userService: UserService = inject(UserService);
   filteredUserList: User[] = [];
+  isLoading: boolean = false;
   page = 1;
-  constructor() {
-    this.userService.getAllUsers(this.page).then((userList: User[]) => {
+  constructor(private userService: UserService) {
+    this.fetchUsers();
+  }
+  
+  async fetchUsers() {
+    this.isLoading = true;
+    try {
+      const userList = await this.userService.getAllUsers(this.page);
       this.userList = userList;
       this.filteredUserList = userList;
-    });
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    } finally {
+      this.isLoading = false;
+    }
   }
   filterResults(text: string) {
     if (!text) {

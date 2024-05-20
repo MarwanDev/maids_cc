@@ -52,17 +52,17 @@ button {
 
 @media (min-width: 500px) and (max-width: 768px) {
   .results {
-      grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
   input[type="text"] {
-      width: 70%;
-  }   
+    width: 70%;
+  }
 }
 
 @media (max-width: 499px) {
   .results {
-      grid-template-columns: 1fr;
-  }    
+    grid-template-columns: 1fr;
+  }
 }
 
 section form input[type="text"] {
@@ -88,11 +88,13 @@ section form button.primary:hover {
   transition: opacity 0.5s ease-in-out; /* Animation properties */
 }
 
-.results app-user:nth-child(odd) { /* Animate odd-numbered elements */
+.results app-user:nth-child(odd) {
+  /* Animate odd-numbered elements */
   animation: slideInLeft 0.5s ease-in-out forwards; /* Animation name and properties */
 }
 
-.results app-user:nth-child(even) { /* Animate even-numbered elements */
+.results app-user:nth-child(even) {
+  /* Animate even-numbered elements */
   animation: slideInRight 0.5s ease-in-out forwards; /* Animation name and properties */
 }
 
@@ -123,7 +125,8 @@ nav button {
   transition: transform 0.1s ease-in-out; /* Animation properties */
 }
 
-nav button:active { /* Style for active button (pressed state) */
+nav button:active {
+  /* Style for active button (pressed state) */
   transform: scale(0.9); /* Shrink slightly on click */
 }
 
@@ -136,4 +139,11 @@ header {
 
 .brand-logo {
   width: 150px;
+}
+
+.progress-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80vw;
 }
